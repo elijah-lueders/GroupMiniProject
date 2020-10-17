@@ -28,7 +28,7 @@ tmp/
 local.properties
 .loadpath
 .factorypath
-*/persistence.xml
+persistence.xml
 
 # GIT
 .git/
