@@ -10,9 +10,7 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Windows
-# thumbnails
-Thumbs.db
+# Mac OS X
 
 # Eclipse
 .settings/
@@ -28,7 +26,9 @@ tmp/
 local.properties
 .loadpath
 .factorypath
+META-INF
 persistence.xml
+*/Users
 
 # GIT
 .git/
