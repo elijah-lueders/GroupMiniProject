@@ -1,12 +1,15 @@
 package model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,18 +26,18 @@ public class Employee {
 	@Column(name = "TITLE")
 	private String title;
 	@Column(name = "START_DATE")
-	private Date startDate;
+	private LocalDate startDate;
 	@Column(name = "DAYS_EMPLOYED")
-	private int daysEmployed;
-	//TODO join column 
+	private String daysEmployed;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "TEAM_ID")
 	private Team team;
 
 	public Employee() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Employee(int id, String firstName, String lastName, String title, Date startDate, int daysEmployed,
+	public Employee(int id, String firstName, String lastName, String title, LocalDate startDate, 
 			Team team) {
 		super();
 		this.id = id;
@@ -42,8 +45,15 @@ public class Employee {
 		this.lastName = lastName;
 		this.title = title;
 		this.startDate = startDate;
-		this.daysEmployed = daysEmployed;
 		this.team = team;
+	}
+
+	public Employee(String firstName, String lastName, String title) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.title = title;
+		this.startDate = LocalDate.now();
+		
 	}
 
 	public int getId() {
@@ -78,20 +88,20 @@ public class Employee {
 		this.title = title;
 	}
 
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public int getDaysEmployed() {
+	public String getDaysEmployed() {
 		return daysEmployed;
 	}
 
-	public void setDaysEmployed(int daysEmployed) {
-		this.daysEmployed = daysEmployed;
+	public void setDaysEmployed(String daysEmployed) {
+		this.daysEmployed = daysEmployed ;
 	}
 
 	public Team getTeam() {
@@ -100,6 +110,13 @@ public class Employee {
 
 	public void setTeam(Team team) {
 		this.team = team;
+	}
+	
+	public String getDetail() {
+		
+		return "Employee ID:" + id + "| Name: " + firstName + " " + lastName + " | Title: " + title
+				+ "| Since: " + startDate + " | " + daysEmployed + "| Team: " + team;
+		
 	}
 
 	@Override
