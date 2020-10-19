@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="employees")
+@Table(name = "employees")
 public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,10 +36,10 @@ public class Employee {
 
 	public Employee() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public Employee(int id, String firstName, String lastName, String title, LocalDate startDate, 
-			Team team) {
+	public Employee(int id, String firstName, String lastName, String title, LocalDate startDate, Team team) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -48,12 +49,13 @@ public class Employee {
 		this.team = team;
 	}
 
-	public Employee(String firstName, String lastName, String title) {
+	public Employee(String firstName, String lastName, String title, LocalDate startDate) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.title = title;
-		this.startDate = LocalDate.now();
-		
+		this.startDate = startDate;
+		setDaysEmployed();
+
 	}
 
 	public int getId() {
@@ -94,14 +96,18 @@ public class Employee {
 
 	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
+		setDaysEmployed();
 	}
 
 	public String getDaysEmployed() {
 		return daysEmployed;
 	}
 
-	public void setDaysEmployed(String daysEmployed) {
-		this.daysEmployed = daysEmployed ;
+	public void setDaysEmployed() {
+		LocalDate start = startDate;
+		LocalDate today = LocalDate.now();
+		Period period = Period.between(start, today);
+		this.daysEmployed = period.getYears() + " Y | " + period.getMonths() + " M | " + period.getDays() + " D";
 	}
 
 	public Team getTeam() {
@@ -111,12 +117,11 @@ public class Employee {
 	public void setTeam(Team team) {
 		this.team = team;
 	}
-	
+
 	public String getDetail() {
-		
-		return "Employee ID:" + id + "| Name: " + firstName + " " + lastName + " | Title: " + title
-				+ "| Since: " + startDate + " | " + daysEmployed + "| Team: " + team;
-		
+
+		return "Employee ID:" + id + "| Name: " + firstName + " " + lastName + " | Title: " + title + "| Since: "
+				+ startDate + " | " + daysEmployed + "| Team: " + team;
 	}
 
 	@Override

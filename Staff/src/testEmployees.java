@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class testEmployees {
 		System.out.println("Title");
 		String title = in.nextLine();
 
-		Employee empToAdd = new Employee(firstName, lastName, title);
+		Employee empToAdd = new Employee(firstName, lastName, title, LocalDate.now());
 		System.out.println(empToAdd.toString());
 		eh.addEmployee(empToAdd);
 
@@ -49,7 +50,7 @@ public class testEmployees {
 			toEdit.setTitle(titleEdit);
 		}
 		eh.editEmployee(toEdit);
-		
+
 	}
 
 	public static void deleteAnEmployee() {
@@ -60,14 +61,13 @@ public class testEmployees {
 		Employee toDel = eh.findEmployeeById(tempId);
 		eh.deleteEmployee(toDel);
 	}
-		
 
 	public static void printList(List<Employee> foundEmployees) {
 		if (foundEmployees.isEmpty()) {
 			System.err.println(">>>>>>EMPTY SET<<<<<<");
-		}else {
+		} else {
 			for (Employee employee : foundEmployees) {
-				System.out.println(employee.getDetail() );
+				System.out.println(employee.getDetail());
 			}
 		}
 
