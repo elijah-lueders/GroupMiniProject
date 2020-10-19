@@ -6,11 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Employees</title>
+<title>Staff | Employees</title>
 </head>
 <body>
 	<header>
-		<h1>Employees</h1>
+		<h1>Staff | Employees</h1>
 	</header>
 	<table>
 		<tr>
@@ -37,10 +37,13 @@
 		</c:forEach>
 
 	</table>
-	<form action="/Staff/new-employee.jsp">
+	<form action="new-employee.jsp">
 		<button type="submit">ADD NEW EMPLOYEE</button>
-	</form>
-	<form action="/Staff/new-team.jsp">
+	</form><br>
+	<form action="viewTeamServlet">
+		<button type="submit">GO TO TEAM LIST</button>
+	</form><br>
+	<form action="new-team.jsp">
 		<button type="submit">ADD NEW TEAM</button>
 	</form>
 	<footer>

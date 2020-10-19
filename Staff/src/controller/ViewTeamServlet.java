@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Employee;
-
 /**
- * Servlet implementation class DeleteEmployeeServlet
+ * Servlet implementation class ViewTeamServlet
  */
-@WebServlet("/deleteEmployeeServlet")
-public class DeleteEmployeeServlet extends HttpServlet {
+@WebServlet("/viewTeamServlet")
+public class ViewTeamServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeleteEmployeeServlet() {
+	public ViewTeamServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -30,8 +28,11 @@ public class DeleteEmployeeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		TeamHelper th = new TeamHelper();
+		
+		request.setAttribute("allTeams", th.getTeamList());
+		
+		getServletContext().getRequestDispatcher("/team-list.jsp").forward(request, response);
 	}
 
 	/**
@@ -40,23 +41,8 @@ public class DeleteEmployeeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		EmployeeHelper eh = new EmployeeHelper();
-
-		String path = "/viewEmployeeServlet";
-
-		String errMsg = "";
-
-		try {
-			Integer tempId = Integer.parseInt(request.getParameter("idToDelete"));
-			Employee empToDelete = eh.findEmployeeById(tempId);
-			eh.deleteEmployee(empToDelete);
-		} catch (Exception e) {
-			errMsg = "select a valid row to delete";
-		}
-		
-		request.setAttribute("errMsg", errMsg);
-		getServletContext().getRequestDispatcher(path).forward(request, response);
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

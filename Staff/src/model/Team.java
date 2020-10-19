@@ -20,7 +20,7 @@ public class Team {
 	private String name;
 	@Column(name = "LOCATION")
 	private String location;
-	private List<Employee> listOfEmployees;
+//	private List<Employee> listOfEmployees;
 
 	public Team() {
 		super();
@@ -32,7 +32,13 @@ public class Team {
 		this.teamId = teamId;
 		this.name = name;
 		this.location = location;
-		this.listOfEmployees = listOfEmployees;
+//		this.listOfEmployees = listOfEmployees;
+	}
+
+	public Team(String name, String location) {
+		super();
+		this.name = name;
+		this.location = location;
 	}
 
 	public int getTeamId() {
@@ -59,18 +65,22 @@ public class Team {
 		this.location = location;
 	}
 
-	public List<Employee> getListOfEmployees() {
-		return listOfEmployees;
-	}
-
-	public void setListOfEmployees(List<Employee> listOfEmployees) {
-		this.listOfEmployees = listOfEmployees;
-	}
-
+//	public List<Employee> getListOfEmployees() {
+//		return listOfEmployees;
+//	}
+//
+//	public void setListOfEmployees(List<Employee> listOfEmployees) {
+//		this.listOfEmployees = listOfEmployees;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "Team [teamId=" + teamId + ", name=" + name + ", location=" + location + ", listOfEmployees="
+//				+ listOfEmployees + "]";
+//	}
 	@Override
 	public String toString() {
-		return "Team [teamId=" + teamId + ", name=" + name + ", location=" + location + ", listOfEmployees="
-				+ listOfEmployees + "]";
+		return "Team [teamId=" + teamId + ", name=" + name + ", location=" + location + "]";
 	}
 
 }

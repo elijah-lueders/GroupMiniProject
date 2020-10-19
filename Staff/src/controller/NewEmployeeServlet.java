@@ -59,7 +59,6 @@ public class NewEmployeeServlet extends HttpServlet {
 			eh.addEmployee(empToAdd);
 		}
 		request.setAttribute("errMsg", errMsg);
-		System.out.println();
 		getServletContext().getRequestDispatcher(path).forward(request, response);
 
 	}
