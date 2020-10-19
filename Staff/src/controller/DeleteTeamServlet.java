@@ -1,25 +1,26 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Employee;
+import model.Team;
 
 /**
- * Servlet implementation class DeleteEmployeeServlet
+ * Servlet implementation class DeleteTeamServlet
  */
-@WebServlet("/deleteEmployeeServlet")
-public class DeleteEmployeeServlet extends HttpServlet {
+@WebServlet("/deleteTeamServlet")
+public class DeleteTeamServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeleteEmployeeServlet() {
+	public DeleteTeamServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -40,21 +41,21 @@ public class DeleteEmployeeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		TeamHelper th = new TeamHelper();
 
-		EmployeeHelper eh = new EmployeeHelper();
-
-		String path = "/viewEmployeeServlet";
+		String path = "/viewTeamServlet";
 
 		String errMsg = "";
 
 		try {
 			Integer tempId = Integer.parseInt(request.getParameter("idToDelete"));
-			Employee empToDelete = eh.findEmployeeById(tempId);
-			eh.deleteEmployee(empToDelete);
+			Team teamToDelete = th.findTeamById(tempId);
+			System.out.println();
+			th.deleteTeam(teamToDelete);
 		} catch (Exception e) {
-			errMsg = "select a valid row to delete";
+			errMsg = "cant delete team that has employees associtated";
 		}
-		
+
 		request.setAttribute("errMsg", errMsg);
 		getServletContext().getRequestDispatcher(path).forward(request, response);
 	}

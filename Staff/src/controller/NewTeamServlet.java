@@ -7,19 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Employee;
+import model.Team;
 
 /**
- * Servlet implementation class DeleteEmployeeServlet
+ * Servlet implementation class NewTeamServlet
  */
-@WebServlet("/deleteEmployeeServlet")
-public class DeleteEmployeeServlet extends HttpServlet {
+@WebServlet("/newTeamServlet")
+public class NewTeamServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeleteEmployeeServlet() {
+	public NewTeamServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -40,21 +40,20 @@ public class DeleteEmployeeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		EmployeeHelper eh = new EmployeeHelper();
-
-		String path = "/viewEmployeeServlet";
-
-		String errMsg = "";
-
-		try {
-			Integer tempId = Integer.parseInt(request.getParameter("idToDelete"));
-			Employee empToDelete = eh.findEmployeeById(tempId);
-			eh.deleteEmployee(empToDelete);
-		} catch (Exception e) {
-			errMsg = "select a valid row to delete";
-		}
+		TeamHelper th = new TeamHelper();
+		String name = request.getParameter("name");
+		String location = request.getParameter("location");
 		
+		String errMsg = "";
+		String path = "/viewTeamServlet";
+		
+		if (name.isEmpty()||location.isEmpty()) {
+			errMsg = "ALL FIELDS ARE REQUIRED";
+			path = "/new-team.jsp";
+		}else {
+			Team teamToAdd = new Team(name, location);
+			th.addTeam(teamToAdd);
+		}
 		request.setAttribute("errMsg", errMsg);
 		getServletContext().getRequestDispatcher(path).forward(request, response);
 	}
