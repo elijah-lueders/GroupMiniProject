@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Employee;
+import model.Team;
 
 /**
  * Servlet implementation class UpdateEmployeeServlet
@@ -40,6 +41,8 @@ public class UpdateEmployeeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		EmployeeHelper eh = new EmployeeHelper();
+		TeamHelper th = new TeamHelper();
+		
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		String firstName = request.getParameter("fname");
 		String lastName = request.getParameter("lname");
@@ -56,6 +59,11 @@ public class UpdateEmployeeServlet extends HttpServlet {
 			path = "/edit-employee.jsp";
 			errMsg = "please enter a first AND last name";
 		} else {
+			if (!request.getParameter("team").isEmpty()) {
+				Integer teamId= Integer.parseInt(request.getParameter("team"));
+				Team teamToAssign = th.findTeamById(teamId);
+				empToEdit.setTeam(teamToAssign);
+			}
 			empToEdit.setFirstName(firstName);
 			empToEdit.setLastName(lastName);
 			empToEdit.setTitle(title);

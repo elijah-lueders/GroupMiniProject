@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -7,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Staff | Employees</title>
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 	<header>
@@ -26,7 +26,7 @@
 				<td>${e.firstName}&nbsp;${e.lastName}</td>
 				<td>${e.title}</td>
 				<td>${e.daysEmployed}</td>
-				<td>to be implemented</td>
+				<td>${e.team.name}</td>
 				<td><form action="editEmployeeServlet" method="post">
 						<button type="submit" name="idToEdit" value="${e.id}">EDIT</button>
 					</form></td>
@@ -37,7 +37,8 @@
 		</c:forEach>
 
 	</table>
-	<form action="new-employee.jsp">
+	<br>
+	<form action="newEmployeeServlet">
 		<button type="submit">ADD NEW EMPLOYEE</button>
 	</form><br>
 	<form action="viewTeamServlet">
